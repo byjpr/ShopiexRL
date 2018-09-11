@@ -1,7 +1,7 @@
-defmodule ShopiexRL.Supervisor do
+defmodule ShopiexRL.StoreSupervisor do
   use DynamicSupervisor
 
-  def start_link() do
+  def start_link([]) do
     DynamicSupervisor.start_link(__MODULE__, :ok, name: __MODULE__)
   end
 
@@ -10,10 +10,7 @@ defmodule ShopiexRL.Supervisor do
   end
 
   def add_store(store_name, initial_count) do
-    # Note that start_child now directly takes in a child_spec.
     child_spec = {ShopiexRL.Store, {store_name, initial_count}}
-    # Equivalent to:
-    # child_spec = Leakybucket.Store.child_spec({store_name, initial_count})
     DynamicSupervisor.start_child(__MODULE__, child_spec)
   end
 

@@ -20,11 +20,15 @@ defmodule ShopiexRL.Mixfile do
   end
 
   def application do
-    []
+    [
+      extra_applications: [:logger, :event_bus],
+      mod: {ShopiexRL, []}
+    ]
   end
 
   defp deps do
     [
+      {:event_bus, "~> 1.5.0"},
       {:tesla, "~> 1.1.0", optional: true},
       {:earmark, "~> 1.2.6", only: :dev},
       {:ex_doc, "~> 0.19.1", only: :dev},
