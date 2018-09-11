@@ -1,3 +1,4 @@
+if Code.ensure_loaded?(:tesla) do
 defmodule ShopiexRL.Tesla.Middleware do
   @moduledoc """
   Middleware between the Tesla client and the Leakybucket process
@@ -55,4 +56,5 @@ defmodule ShopiexRL.Tesla.Middleware do
         {:error, :unavailable}
     end
   end
+end
 end
