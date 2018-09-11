@@ -1,8 +1,16 @@
 if Code.ensure_loaded?(:tesla) do
 defmodule ShopiexRL.Tesla.Middleware do
   @moduledoc """
-  Middleware between the Tesla client and the Leakybucket process
+  Middleware for [tesla](https://github.com/teamon/tesla)
+  Remember to add `{:tesla, "~> 1.1.0"}` to dependencies (and `:tesla` to applications in `mix.exs`)
+  Also, you need to recompile ShopiexRL after adding `:tesla` dependency:
+  ```
+  mix deps.clean shopiexrl
+  mix deps.get
+  mix deps.compile shopiexrl
+  ```
   """
+
 
   @behaviour Tesla.Middleware
   require Logger
