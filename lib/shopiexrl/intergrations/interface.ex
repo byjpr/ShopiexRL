@@ -17,7 +17,7 @@ defmodule ShopiexRL.Interface do
     Logger.info(fn ->
       "[ShopiexRL.Interface]: Asking supervisor to start a store for #{inspect(name)}"
     end)
-    ShopiexRL.Supervisor.add_store(name, 0)
+    ShopiexRL.StoreSupervisor.add_store(name, 0)
   end
 
   @spec increment(atom()) :: any()
