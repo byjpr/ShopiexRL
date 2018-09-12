@@ -24,7 +24,13 @@ $ iex -S mix
 
 ## What is happening here?
 
-![Hero block](https://raw.githubusercontent.com/byjord/Assets/master/ShopiexRL.png)
+![current state](https://raw.githubusercontent.com/byjord/Assets/master/ShopiexRL.png)
+
+---
+
+## Future plan?
+
+![Future plan](https://raw.githubusercontent.com/byjord/Assets/master/ShopiexRL.png)
 
 ### Journey
 
