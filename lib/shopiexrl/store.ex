@@ -29,7 +29,8 @@ defmodule ShopiexRL.Store do
   end
 
   @spec handle_call(:health_check, pid(), %{count: any(), name: any()}) :: tuple()
-  def handle_call(:health_check, _from, %{count: count, name: name}) when count + @base_increment_rate > @base_size do
+  def handle_call(:health_check, _from, %{count: count, name: name})
+      when count + @base_increment_rate > @base_size do
     ShopiexRL.event(:shopiexrl_store_events, %{
       name: name,
       count: count,
@@ -53,7 +54,8 @@ defmodule ShopiexRL.Store do
   end
 
   @spec handle_call(:increment, pid(), %{count: any(), name: any()}) :: tuple()
-  def handle_call(:increment, _from, %{count: count, name: name}) when count + @base_increment_rate > @base_size do
+  def handle_call(:increment, _from, %{count: count, name: name})
+      when count + @base_increment_rate > @base_size do
     ShopiexRL.event(:shopiexrl_store_events, %{
       name: name,
       count: count,
