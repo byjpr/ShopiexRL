@@ -30,7 +30,7 @@ $ iex -S mix
 
 ## Future plan?
 
-![Future plan](https://raw.githubusercontent.com/byjord/Assets/master/ShopiexRL.png)
+![Future plan](https://raw.githubusercontent.com/byjord/Assets/master/FutureShopiexRL.png)
 
 ### Journey
 
