@@ -14,9 +14,11 @@ defmodule ShopiexRL.Interface do
 
   @spec install(atom()) :: any()
   def install(name) do
-    Logger.info(fn ->
-      "[ShopiexRL.Interface]: Asking supervisor to start a store for #{inspect(name)}"
-    end)
+    ShopiexRL.event(:shopiexrl_store_events, %{
+      name: name,
+      type: :install
+    })
+
     ShopiexRL.StoreSupervisor.add_store(name, 0)
   end
 

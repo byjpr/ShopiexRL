@@ -12,4 +12,13 @@ defmodule ShopiexRL do
     opts = [strategy: :one_for_one, name: ShopiexRL.Supervisor]
     Supervisor.start_link(children, opts)
   end
+
+  def event(topic, data) do
+    EventBus.notify(%EventBus.Model.Event{
+      id: UUID.uuid4(),
+      occurred_at: :os.system_time(:seconds),
+      topic: topic,
+      data: data
+    })
+  end
 end
