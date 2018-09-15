@@ -6,7 +6,7 @@ config :event_bus,
 config :event_bus_logger,
   enabled: {:system, "EB_LOGGER_ENABLED", "true"},
   level: {:system, "EB_LOGGER_LEVEL", :info},
-  topics: {:system, "EB_LOGGER_TOPICS", "shopiexrl_store_events"},
+  topics: {:system, "EB_LOGGER_TOPICS", ".*"},
   light_logging: {:system, "EB_LOGGER_LIGHT", "false"}
 
 import_config "#{Mix.env}.exs"
