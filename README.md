@@ -25,9 +25,9 @@ $ iex -S mix
 Usage with [Tesla](https://github.com/teamon/tesla) HTTP client library for Elixir, using `my-shopify-subdomain.myshopify.com` as an example store URL.
 
 ```elixir
-  Tesla.build_client([
-		{ShopiexRL.Tesla.Middleware, name: "my-shopify-subdomain"}
-  ])
+Tesla.build_client([
+	{ShopiexRL.Tesla.Middleware, name: "my-shopify-subdomain"}
+])
 ```
 
 ### Can this fall out of sync with Shopifys count?
