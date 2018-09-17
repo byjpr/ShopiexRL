@@ -33,13 +33,16 @@ defmodule ShopiexRL.Store do
   # -------------------
   # When the bucket is full
   # -------------------
-  defp health_check(%State.Store{
-    count: count,
-    rates: %State.StoreRates{
-      increment_rate: increment_rate,
-      cap: cap
-    }
-  } = state_obj) when will_overfill?(count, increment_rate, cap) do
+  defp health_check(
+         %State.Store{
+           count: count,
+           rates: %State.StoreRates{
+             increment_rate: increment_rate,
+             cap: cap
+           }
+         } = state_obj
+       )
+       when will_overfill?(count, increment_rate, cap) do
     ShopiexRL.event(:shopiexrl_store_events, %{
       state: state_obj,
       type: :health_check,
@@ -65,13 +68,16 @@ defmodule ShopiexRL.Store do
   # -------------------
   # When the bucket is full
   # -------------------
-  defp increment(%State.Store{
-    count: count,
-    rates: %State.StoreRates{
-      increment_rate: increment_rate,
-      cap: cap
-    }
-  } = state_obj) when will_overfill?(count, increment_rate, cap) do
+  defp increment(
+         %State.Store{
+           count: count,
+           rates: %State.StoreRates{
+             increment_rate: increment_rate,
+             cap: cap
+           }
+         } = state_obj
+       )
+       when will_overfill?(count, increment_rate, cap) do
     ShopiexRL.event(:shopiexrl_store_events, %{
       state: state_obj,
       type: :increment,
@@ -84,7 +90,7 @@ defmodule ShopiexRL.Store do
   # -------------------
   # Default increment event
   # -------------------
-  defp increment(%State.Store{ } = state_obj) do
+  defp increment(%State.Store{} = state_obj) do
     next_state = state_obj |> increase_count |> empty_killdown
 
     ShopiexRL.event(:shopiexrl_store_events, %{
@@ -100,18 +106,22 @@ defmodule ShopiexRL.Store do
   # -------------------
   # Shutdown when killdown reaches 15
   # -------------------
-  defp leak(%State.Store{
-    count: count,
-    killdown: killdown,
-    rates: %State.StoreRates{
-      leak_rate: leak_rate
-    }
-  } = state_obj) when will_underfill?(count, leak_rate) and killdown >= 15 do
+  defp leak(
+         %State.Store{
+           count: count,
+           killdown: killdown,
+           rates: %State.StoreRates{
+             leak_rate: leak_rate
+           }
+         } = state_obj
+       )
+       when will_underfill?(count, leak_rate) and killdown >= 15 do
     ShopiexRL.event(:shopiexrl_store_events, %{
       state: state_obj,
       type: :shutting_down,
       response: :ok
     })
+
     ShopiexRL.StoreSupervisor.kill_worker(self())
   end
 
@@ -119,13 +129,16 @@ defmodule ShopiexRL.Store do
   # Leak when `leak_rate` is greater than `count`,
   # set count to just `0`
   # -------------------
-  defp leak(%State.Store{
-    count: count,
-    rates: %State.StoreRates{
-      leak_interval: leak_interval,
-      leak_rate: leak_rate
-    }
-  } = state_obj) when will_underfill?(count, leak_rate) do
+  defp leak(
+         %State.Store{
+           count: count,
+           rates: %State.StoreRates{
+             leak_interval: leak_interval,
+             leak_rate: leak_rate
+           }
+         } = state_obj
+       )
+       when will_underfill?(count, leak_rate) do
     next_state = state_obj |> empty_count |> inc_killdown
 
     ShopiexRL.event(:shopiexrl_store_leak_events, %{
@@ -158,7 +171,7 @@ defmodule ShopiexRL.Store do
   #  State Providers and Modifiers
   #  ==================================
   defp store_rates_provider(multiplier \\ 1) do
-    %State.StoreRates {
+    %State.StoreRates{
       increment_rate: 1,
       leak_rate: 2 * multiplier,
       leak_interval: 500,
@@ -169,48 +182,56 @@ defmodule ShopiexRL.Store do
   # -------------------
   #  Increase killdown
   # -------------------
-  defp inc_killdown(%State.Store{
-    killdown: killdown,
-  } = state_obj) do
-    Map.put(state_obj, :killdown, (killdown + 1))
+  defp inc_killdown(
+         %State.Store{
+           killdown: killdown
+         } = state_obj
+       ) do
+    Map.put(state_obj, :killdown, killdown + 1)
   end
 
   # -------------------
   #  Empty killdown
-  defp empty_killdown(%State.Store{
-    killdown: killdown,
-  } = state_obj) do
+  defp empty_killdown(
+         %State.Store{
+           killdown: killdown
+         } = state_obj
+       ) do
     Map.put(state_obj, :killdown, 0)
   end
 
   # -------------------
   #  Increase count
   # -------------------
-  defp increase_count(%State.Store{
-    count: count,
-    rates: %State.StoreRates{
-      increment_rate: increment_rate
-    }
-  } = state_obj) do
-    Map.put(state_obj, :count, (count + increment_rate))
+  defp increase_count(
+         %State.Store{
+           count: count,
+           rates: %State.StoreRates{
+             increment_rate: increment_rate
+           }
+         } = state_obj
+       ) do
+    Map.put(state_obj, :count, count + increment_rate)
   end
 
   # -------------------
   #  Increase count
   # -------------------
-  defp decrease_count(%State.Store{
-    count: count,
-    rates: %State.StoreRates{
-      leak_rate: leak_rate
-    }
-  } = state_obj) do
-    Map.put(state_obj, :count, (count - leak_rate))
+  defp decrease_count(
+         %State.Store{
+           count: count,
+           rates: %State.StoreRates{
+             leak_rate: leak_rate
+           }
+         } = state_obj
+       ) do
+    Map.put(state_obj, :count, count - leak_rate)
   end
 
   # -------------------
   #  Increase count
   # -------------------
-  defp empty_count(%State.Store{ } = state_obj) do
+  defp empty_count(%State.Store{} = state_obj) do
     Map.put(state_obj, :count, 0)
   end
 end
