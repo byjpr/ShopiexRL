@@ -22,6 +22,14 @@ $ mix deps.get
 $ iex -S mix
 ```
 
+Usage with [Tesla](https://github.com/teamon/tesla) HTTP client library for Elixir, using `my-shopify-subdomain.myshopify.com` as an example store URL.
+
+```elixir
+  Tesla.build_client([
+		{ShopiexRL.Tesla.Middleware, name: "my-shopify-subdomain"}
+  ])
+```
+
 ### Can this fall out of sync with Shopifys count?
 
 Yes. ShopiexRL is not 100% accurate at the moment with staying in sync with Shopify's leaky bucket algorithm. Here we're attempting to manage large amounts of requests and avoid ever triggering a `422` response.
