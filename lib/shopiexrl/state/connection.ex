@@ -1,11 +1,11 @@
-defmodule Shopiexrl.Db.Connection do
+defmodule Shopiexrl.Connection do
   use Memento.Table,
     attributes: [:id, :pool, :pid, :updated_at, :created_at],
     index: [:pool, :pid, :updated_at],
     type: :ordered_set,
     autoincrement: true
 
-  def create_connection(pool, pid) when is_atom(pool) and is_pid(pid) do
+  def create(pool, pid) when is_atom(pool) and is_pid(pid) do
     %__MODULE__{
       id: UUID.uuid4(),
       pool: pool,

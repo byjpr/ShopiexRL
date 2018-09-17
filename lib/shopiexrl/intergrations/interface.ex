@@ -26,7 +26,7 @@ defmodule ShopiexRL.Interface do
   def increment(name) do
     case __MODULE__.ask(name) do
       :ok ->
-        GenServer.call(String.to_atom(name), :increment)
+        GenServer.call(String.to_atom(name), :request_lock)
 
       {:error, :not_found} ->
         {:error, :not_found}
