@@ -5,6 +5,8 @@ defmodule ShopiexRL do
   use Application
 
   def start(_type, _args) do
+    Memento.Table.create!(Shopiexrl.Db.Connection)
+
     children = [
       {ShopiexRL.StoreSupervisor, []}
     ]

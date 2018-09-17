@@ -21,7 +21,7 @@ defmodule ShopiexRL.Mixfile do
 
   def application do
     [
-      extra_applications: [:logger, :event_bus],
+      extra_applications: [:logger, :event_bus, :memento],
       mod: {ShopiexRL, []}
     ]
   end
@@ -29,9 +29,14 @@ defmodule ShopiexRL.Mixfile do
   defp deps do
     [
       {:uuid, "~> 1.1"},
+      # Data
+      {:memento, "~> 0.2.1"},
+      # Events
       {:event_bus, "~> 1.5.0"},
       {:event_bus_logger, "~> 0.1.6"},
+      # Intergrations
       {:tesla, "~> 1.1.0", optional: true},
+      # Testing
       {:earmark, "~> 1.2.6", only: :dev},
       {:ex_doc, "~> 0.19.1", only: :dev},
       {:inch_ex, "~> 1.0.0", only: :dev},

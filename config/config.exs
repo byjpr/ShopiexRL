@@ -9,4 +9,7 @@ config :event_bus_logger,
   topics: {:system, "EB_LOGGER_TOPICS", ".*"},
   light_logging: {:system, "EB_LOGGER_LIGHT", "false"}
 
+config :mnesia,
+  dir: '.mnesia/#{Mix.env}/#{node()}'
+
 import_config "#{Mix.env}.exs"
