@@ -9,8 +9,8 @@ defmodule ShopiexRL.StoreSupervisor do
     DynamicSupervisor.init(strategy: :one_for_one)
   end
 
-  def add_store(store_name, initial_count) do
-    child_spec = {ShopiexRL.Store, {store_name, initial_count}}
+  def add_store(store_name) do
+    child_spec = {ShopiexRL.Store, {store_name}}
     DynamicSupervisor.start_child(__MODULE__, child_spec)
   end
 
