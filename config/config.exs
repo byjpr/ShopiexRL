@@ -4,7 +4,7 @@ config :event_bus,
   topics: [:shopiexrl_store_events, :shopiexrl_store_leak_events]
 
 config :event_bus_logger,
-  enabled: {:system, "EB_LOGGER_ENABLED", "true"},
+  enabled: {:system, "EB_LOGGER_ENABLED", "false"},
   level: {:system, "EB_LOGGER_LEVEL", :info},
   topics: {:system, "EB_LOGGER_TOPICS", ".*"},
   light_logging: {:system, "EB_LOGGER_LIGHT", "false"}

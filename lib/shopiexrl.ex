@@ -7,6 +7,8 @@ defmodule ShopiexRL do
   def start(_type, _args) do
     Memento.Table.create!(Shopiexrl.Connection)
 
+    EventBus.subscribe({ShopiexRL.EventSink, [".*"]})
+
     children = [
       {ShopiexRL.StoreSupervisor, []}
     ]
