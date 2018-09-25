@@ -1,10 +1,25 @@
 defmodule Shopiexrl.Connection do
   use Memento.Table,
-    attributes: [:id, :pool, :pid, :updated_at, :created_at],
+    attributes: [:id, :pool, :pid, :updated_at, :created_at, :state],
     index: [:pool, :pid, :updated_at],
     type: :ordered_set,
     autoincrement: true
 
+  use Machinery,
+    # The first state declared will be considered
+    # the initial state
+    states: [
+      "unassigned",
+      "assigned",
+      "cooldown"
+    ],
+    transitions: %{
+      "unassigned" => "assigned",
+      "assigned" => "cooldown",
+      "cooldown" => "unassigned"
+    }
+
+  ##  Assign
   def create(pool \\ :unassigned, pid \\ nil) when is_atom(pool) do
     %__MODULE__{
       id: UUID.uuid4(),
@@ -15,16 +30,19 @@ defmodule Shopiexrl.Connection do
     }
   end
 
+  ##  Change Pool
   def change_pool(:"$end_of_table", _pool), do: :"$end_of_table"
   def change_pool(self, pool) do
     %__MODULE__{self | pool: pool, updated_at: :os.system_time(:seconds)}
   end
 
+  ##  Release Lock
   def release_lock(:"$end_of_table"), do: :"$end_of_table"
   def release_lock([self]) do
     %__MODULE__{self | pid: nil}
   end
 
+  ##  Assign 
   def assign_to(:"$end_of_table", _pid), do: :"$end_of_table"
   def assign_to([self], pid) do
     %__MODULE__{self | pid: pid, updated_at: :os.system_time(:seconds)}

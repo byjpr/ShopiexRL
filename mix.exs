@@ -29,6 +29,7 @@ defmodule ShopiexRL.Mixfile do
   defp deps do
     [
       {:uuid, "~> 1.1"},
+      {:machinery, "~> 0.16.0"},
       # Data
       {:memento, "~> 0.2.1"},
       # Events
