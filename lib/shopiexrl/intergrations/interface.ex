@@ -18,8 +18,8 @@ defmodule ShopiexRL.Interface do
     ShopiexRL.StoreSupervisor.add_store(name)
   end
 
-  @spec aqu_lock(atom()) :: any()
-  def aqu_lock(name), do: do_call(name, :request_lock)
+  @spec acquire_lock(atom()) :: any()
+  def acquire_lock(name), do: do_call(name, :request_lock)
 
   @spec release_lock(atom()) :: any()
   def release_lock(name), do: do_call(name, :release_lock)
