@@ -33,6 +33,15 @@ The main point of lost accuracy is with the movement from the locked pool to the
 
 ---
 
+Install a counter called `:test`, and then attempt to acquire lock for it.
+
+```console
+$ ShopiexRL.Interface.install(:test)
+$ ShopiexRL.Interface.aqu_lock(:test)
+```
+
+---
+
 ## Future plan?
 
 ![Future plan](https://raw.githubusercontent.com/byjord/Assets/master/FutureShopiexRL.png)
