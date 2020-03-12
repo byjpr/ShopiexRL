@@ -29,7 +29,7 @@ defmodule ShopiexRL.Mixfile do
   defp deps do
     [
       {:uuid, "~> 1.1"},
-      {:event_bus, "~> 1.5.0"},
+      {:event_bus, "~> 1.6.1"},
       {:event_bus_logger, "~> 0.1.6"},
       {:tesla, "~> 1.1.0", optional: true},
       {:earmark, "~> 1.2.6", only: :dev},
