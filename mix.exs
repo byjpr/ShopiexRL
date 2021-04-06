@@ -33,7 +33,7 @@ defmodule ShopiexRL.Mixfile do
       {:event_bus_logger, "~> 0.1.6"},
       {:tesla, "~> 1.1.0", optional: true},
       {:earmark, "~> 1.2.6", only: :dev},
-      {:ex_doc, "~> 0.19.1", only: :dev},
+      {:ex_doc, "~> 0.24.2", only: :dev},
       {:inch_ex, "~> 1.0.0", only: :dev},
       {:excoveralls, "~> 0.5", only: :test},
       {:exvcr, "~> 0.10.2", only: :test},
