@@ -36,7 +36,7 @@ defmodule ShopiexRL.Mixfile do
       {:ex_doc, "~> 0.19.1", only: :dev},
       {:inch_ex, "~> 1.0.0", only: :dev},
       {:excoveralls, "~> 0.5", only: :test},
-      {:exvcr, "~> 0.10.2", only: :test},
+      {:exvcr, "~> 0.12.3", only: :test},
       {:meck, "~> 0.8.9", only: :test}
     ]
   end
