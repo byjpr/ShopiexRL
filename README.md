@@ -1,3 +1,7 @@
+Note, with the introduction of GraphQL, the method of rate limiting has changed and is no longer a fix cost per call.
+
+---------
+
 # Shopiexrl
 
 [![Build Status](https://travis-ci.com/byjord/Shopiexrl.svg?branch=master)](https://travis-ci.com/byjord/Shopiexrl)
